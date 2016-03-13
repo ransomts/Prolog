@@ -1,6 +1,8 @@
-/* First attempt at some prolog code */
+-/* First attempt at some prolog code */
 
 % Declaring some people
+% the data here does have to 
+% be lowercase for semantics
 male(tim).
 male(scott).
 male(joe).
