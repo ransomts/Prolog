@@ -31,7 +31,7 @@ num_elements([_ | Y], N) :- num_elements(Y, K), N is K + 1.
 
 
 % P05 (*) Reverse a list.
-my_reverse(L1,L2) :- my_rev(L1,L2,[]).
+nmy_reverse(L1,L2) :- my_rev(L1,L2,[]).
 
 my_rev([],L2,L2) :- !.
 my_rev([X|Xs],L2,Acc) :- my_rev(Xs,L2,[X|Acc]).
@@ -63,3 +63,25 @@ compress([], []).
 compress([A], [A]).
 compress([A, A | Cs], Zs) :- compress([A | Cs], Zs).
 compress([A, B | Cs], [A | Zs]) :- A \= B, compress([B | Cs], Zs).
+
+%% (**) Pack consecutive duplicates of list elements into sublists.
+%% If a list contains repeated elements they should be placed in separate sublists.
+
+%% Example:
+%% ?- pack([a,a,a,a,b,c,c,a,a,d,e,e,e,e],X).
+%% X = [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]]
+
+% simple base cases
+pack([], []).
+pack([A], [A]).
+% list with many of one element
+pack([A, B | Bs], [[A, A | As] | Cs]).
+
+
+%% P14 (*) Duplicate the elements of a list.
+%% Example:
+%% ?- dupli([a,b,c,c,d],X).
+%% X = [a,a,b,b,c,c,c,c,d,d]
+dupli([], []).
+dupli([X], [X, X]).
+dupli([X | Xs], Ys) :- dupli([X], A), dupli(Xs, As), append(A, As, Ys).
